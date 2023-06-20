@@ -8,4 +8,4 @@ jobs:
       image: ubuntu:18.04
     steps:
       - name: checking
-        run: lsb_release -a
+        run: cat /etc/os-release
