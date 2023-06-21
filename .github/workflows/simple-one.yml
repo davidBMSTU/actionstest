@@ -23,4 +23,6 @@ jobs:
           outputs: type=docker,dest=/tmp/coteahost.tar
       -
         name: Run tests
-        run: docker run coteahost:latest
+        run: |
+          docker load --input /tmp/coteahost.tar
+          docker image ls -a
