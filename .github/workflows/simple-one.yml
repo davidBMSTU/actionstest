@@ -2,10 +2,25 @@ name: learn-github-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
-  containertest:
+  cotea_tests_run:
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:18.04
+    services:
+      ansiblehost:
+        image: dbadalyan/ansible-host-github-actions
     steps:
-      - name: checking
-        run: cat /etc/os-release
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Build and export
+        uses: docker/build-push-action@v4
+        with:
+          context: ./docker/cotea_container/
+          tags: coteahost:latest
+          outputs: type=docker,dest=/tmp/coteahost.tar
+      -
+        name: Run tests
+        run: docker run coteahost:latest
