@@ -26,3 +26,4 @@ jobs:
         run: |
           docker load --input /tmp/coteahost.tar
           docker image ls -a
+          docker run coteahost
