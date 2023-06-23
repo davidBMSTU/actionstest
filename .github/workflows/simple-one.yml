@@ -4,6 +4,8 @@ on: [push]
 jobs:
   cotea_tests_run:
     runs-on: ubuntu-latest
+    env:
+      ANSIBLE_HOST_KEY_CHECKING: False
     services:
       ansiblehost:
         image: dbadalyan/ansible-host-github-actions
