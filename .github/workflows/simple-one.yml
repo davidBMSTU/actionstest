@@ -7,23 +7,24 @@ jobs:
     services:
       ansiblehost:
         image: dbadalyan/ansible-host-github-actions
+        ports:
+          - 2222:22
     steps:
       -
         name: Checkout
         uses: actions/checkout@v3
       -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
-        name: Build and export
-        uses: docker/build-push-action@v4
+        name: Checkout
+        uses: actions/setup-python@v4
         with:
-          context: ./docker/cotea_container/
-          tags: coteahost:latest
-          outputs: type=docker,dest=/tmp/coteahost.tar
+          python-version: '3.x'
+
+      -
+        name: Install dependencies
+        run: python install ansible
+
       -
         name: Run tests
         run: |
-          docker load --input /tmp/coteahost.tar
-          docker image ls -a
-          docker run coteahost
+          cd cotea/src
+          python cotea_run.py
