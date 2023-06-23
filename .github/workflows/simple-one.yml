@@ -21,7 +21,7 @@ jobs:
 
       -
         name: Install dependencies
-        run: python install ansible
+        run: pip install ansible
 
       -
         name: Run tests
