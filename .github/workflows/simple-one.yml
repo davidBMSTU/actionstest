@@ -27,5 +27,5 @@ jobs:
         name: Run tests
         run: |
           ls
-          cd ./cotea/src
+          cd ./coteaa/src
           python cotea_run.py
