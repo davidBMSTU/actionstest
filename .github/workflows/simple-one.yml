@@ -26,8 +26,14 @@ jobs:
         run: pip install ansible
 
       -
+        name: Configure ssh
+        run: |
+          cd ./coteaa/src/cotea_run_files
+          chmod +x configure_ssh.sh
+          ./configure_ssh.sh
+        
+      -
         name: Run tests
         run: |
-          ls
-          cd ./coteaa/src
+          cd ../
           python cotea_run.py
