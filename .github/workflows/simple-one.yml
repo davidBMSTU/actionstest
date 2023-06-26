@@ -8,7 +8,7 @@ jobs:
       ANSIBLE_HOST_KEY_CHECKING: False
     services:
       ansiblehost:
-        image: dbadalyan/ansible-host-github-actions
+        image: dbadalyan/ansible_host_special
         ports:
           - 2222:22
     steps:
@@ -24,16 +24,9 @@ jobs:
       -
         name: Install dependencies
         run: pip install ansible
-
-      -
-        name: Configure ssh
-        run: |
-          cd ./coteaa/src/cotea_run_files
-          chmod +x configure_ssh.sh
-          ./configure_ssh.sh
         
       -
         name: Run tests
         run: |
-          cd ../
+          cd ./coteaa/src
           python cotea_run.py
