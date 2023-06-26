@@ -29,4 +29,5 @@ jobs:
         name: Run tests
         run: |
           cd ./coteaa/src
-          python cotea_run.py
+          python cotea_ok_case.py
+          python cotea_ansible_error_case.py
